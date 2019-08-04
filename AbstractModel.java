@@ -1,26 +1,42 @@
 package model;
+
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
+
+//Abstract root class of Model hierarchy - provides basic
+//notification behaviour
 
 public abstract class AbstractModel implements Model
 {
-	private List<ModelListener> listeners = new ArrayList<ModelListener>(5);
+	private ArrayList listeners = new ArrayList(5);
+	
+	//Method that is called by subclasses of AbstractModel
+	//when they want to notify other classes of changes 
+	//to themselves.
 	
 	public void notifyChanged(ModelEvent event)
 	{
-		for(ModelListener ml : listeners)
+		ArrayList list = (ArrayList)listeners.clone();
+		Iterator it = list.iterator();
+		while(it.hasNext()) 
 		{
-			ml.modelChanged(event);
+			ModelListener ml = (ModelListener)it.next();
+				ml.modelChanged(event);
 		}
 	}
 	
-	public void addModelListener(ModelListener 1)
+	//Add a ModelListener to the list of objects 
+	//interested in ModelEvents.
+	public void addModelListener(ModelListener listenerToAdd)
 	{
-		listeners.add(1);
+		listeners.add(listenerToAdd);
 	}
 	
-	public void removeModelListener(ModelListener 1)
+	//Remove a ModelListener from the list of objects 
+	//interested in ModelEvents.
+	public void removeModeListener(ModelListener listenerToRemove)
 	{
-		listeners.remove(1);
+		listeners.remove(listenerToRemove);
 	}
 }
