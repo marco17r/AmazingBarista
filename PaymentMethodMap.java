@@ -10,7 +10,7 @@ public class PaymentMethodMap
 			new PaymentMethod(2,"Paper Check", 0),
 			new PaymentMethod(3,"Visa Card", 0),
 			new PaymentMethod(4,"Master Card", 0),
-			new PaymentMethod(5,"Discovery Card", 0),
+			new PaymentMethod(5,"Discover Card", 0),
 			new PaymentMethod(6,"AMEX", 0),
 	};
 	

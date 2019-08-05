@@ -16,25 +16,26 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class MemberLogin {
+public class MemberLogin 
+{
 
     public static String userName;
-
     public static String password;
 
     public static ObservableList<Object> Menu;
 
-    public static void displayLogIn() {
+    public static void displayLogIn() 
+    {
         Stage window = new Stage();
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
         window.setTitle("Member Login");
         window.setMinWidth(250);
-        Label userNameLabel = new Label("UserName:");
-        Label passwordLabel = new Label("Password:");
+        Label userNameLabel = new Label("UserName :");
+        Label passwordLabel = new Label("Password :");
         TextField userNameInput = new TextField();
         TextField passwordInput = new TextField();
-        TextField errorText = new TextField();
+        Label errorText = new Label("Invalid UserName or Password..Please Try Again");
 
         //Start Button
         Button logInButton = new Button("Member Login");
@@ -44,23 +45,27 @@ public class MemberLogin {
             MemberLogin.password = passwordInput.getText();
 
             //check whether userName and password are valid
-            try {
-                //                OutputStream output = new FileOutputStream("/resources/password.properties");
+            try 
+            {
+                //OutputStream output = new FileOutputStream("/resources/password.properties");
                 InputStream input = new FileInputStream("/Users/vkonke/git/demo/resources/password.properties");
                 Properties prop = new Properties();
                 prop.load(input);
                 int numberOftries = 3;
 
-                if (prop.get(userName) != null && prop.get(userName).equals(password)) {
-                    MenuPage menuPage = new MenuPage();
+                if (prop.get(userName) != null && prop.get(password).equals(password)) 
+                {
+                    MenuWindow menuPage = new MenuWindow();
                     menuPage.menuDisplayPage("Member");
 
                     CheckoutPage checkoutPage = new CheckoutPage();
                     checkoutPage.payment();
                 }
-
-                errorText.setText("Invalid UserName or Password..Please Try Again");
-            } catch (IOException e1) {
+                else
+                	errorText.getContentDisplay();
+            } 
+            catch (IOException e1) 
+            {
                 e1.printStackTrace();
             }
 
@@ -71,13 +76,15 @@ public class MemberLogin {
             System.out.print("closing window");
             window.close();
         });
+        
         //Exit Button
-        Button cancelButton = new Button("CANCEL");
+        Button cancelButton = new Button("Cancel");
         cancelButton.setOnAction(e -> window.close());
+        
         //Display Set-up?
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(20, 20, 20, 20));
-        layout.getChildren().addAll(userNameLabel, userNameInput, passwordLabel, passwordInput, logInButton, cancelButton, errorText);
+        layout.getChildren().addAll(userNameLabel, userNameInput, passwordLabel, passwordInput, logInButton, cancelButton);
         layout.setAlignment(Pos.TOP_LEFT);
         //Display login window and wait for it to be cancelled before returning.
         Scene scene = new Scene(layout);
@@ -85,7 +92,8 @@ public class MemberLogin {
         window.showAndWait();
     }
 
-    public static void displayDrinkMenu() {
+    public static void displayDrinkMenu() 
+    {
         Stage window = new Stage();
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);

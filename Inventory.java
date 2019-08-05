@@ -14,8 +14,9 @@ public class Inventory extends Drink {
 
     public Map<String, Drink> mapOfDrinks = new TreeMap<>();
 
-    public Map<String, Drink> storeDefaultDrinkMenu() {
-        mapOfDrinks.put("Normal Drinking Water", new Drink("Normal Warm Drinking Water", "Drinking Water", new BigDecimal("0.0")));
+    public Map<String, Drink> storeDefaultDrinkMenu() 
+    {
+        mapOfDrinks.put("Water", new Drink("Water", "Drinking Water", new BigDecimal("0.0")));
         mapOfDrinks.put("Lemonade", new Drink("Lemonade", "Water with lemon juice and brown sugar", new BigDecimal("1.0")));
         mapOfDrinks.put("Kombucha", new Drink("Kombucha", "Probiotic drink from India, great for gut flora", new BigDecimal("4.0")));
         mapOfDrinks.put("Limeade", new Drink("Limeade", "Water with lime juice and brown sugar", new BigDecimal("1.0")));
