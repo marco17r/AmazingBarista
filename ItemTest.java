@@ -4,6 +4,8 @@ import org.junit.*;
 
 import model.*;
 
+import static com.sun.xml.internal.ws.dump.LoggingDumpTube.Position.Before;
+
 //Constant strings in the view;
 
 //test case for ordering drinks, creating customer and picking out specific drinks
