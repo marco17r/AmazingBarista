@@ -13,9 +13,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.PaymentMethodMap;
 
-public class CheckoutPage {
+public class CheckoutPage 
+{
 
-    public void payment(){
+    public void payment()
+    { 
         Stage window = new Stage();
         //Block events to other windows
         window.initModality(Modality.APPLICATION_MODAL);
@@ -30,7 +32,7 @@ public class CheckoutPage {
         TextField firstNameText = new TextField();
         TextField lastNameText = new TextField();
         Button submitButton = new Button("Submit Payment");
-        TextField thankYouText = new TextField();
+        Label thankYouText = new Label("Thank You For Ordering with Amazing Barista!");
 
         PaymentMethodMap paymentMethodMap = new PaymentMethodMap();
         final ComboBox paymentOptions = new ComboBox();
@@ -46,15 +48,19 @@ public class CheckoutPage {
         );
 
 
-        paymentOptions.setOnAction(e -> {
+        paymentOptions.setOnAction(e -> 
+        {
             performActionOnSelectedComboBox((String) paymentOptions.getSelectionModel().getSelectedItem());
         });
 
-        submitButton.setOnAction(e ->{
+        submitButton.setOnAction(e ->
+        {
                 thankYouText.setText("Thank you for your payment...Enjoy your drink");
-            try {
+            try 
+            {
                 Thread.sleep(10L);
-            } catch (InterruptedException e1) {
+            } catch (InterruptedException e1) 
+            {
                 e1.printStackTrace();
             }
             window.close();
@@ -67,12 +73,12 @@ public class CheckoutPage {
     }
 
     private void performActionOnSelectedComboBox(String selectedItem) {
-        switch(selectedItem){
-        case "Visa Card":
-        case "Master Card":
-        case "Discovery Card":
-        case "AMEX":
-            //Block events to other windows
+        switch(selectedItem)
+        {
+		    case "Visa Card":
+		    case "Master Card":
+		    case "Discovery Card":
+		    case "AMEX":
             Stage window = new Stage();
             //Block events to other windows
             window.initModality(Modality.APPLICATION_MODAL);

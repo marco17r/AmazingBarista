@@ -1,9 +1,11 @@
 package view;
 
-public class GuestLogin {
+public class GuestLogin 
+{
 
-    public void displayMenu() {
-        MenuPage menuPage = new MenuPage();
+    public void displayMenu() 
+    {
+        MenuWindow menuPage = new MenuWindow();
         menuPage.menuDisplayPage("Guest");
 
         CheckoutPage checkoutPage = new CheckoutPage();
