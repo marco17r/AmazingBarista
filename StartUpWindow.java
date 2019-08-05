@@ -26,31 +26,27 @@ public class StartUpWindow extends Application
 			e.consume();
 		});
 
-		/*-------------------------------------------------- */
+		Button memberSignInButton = new Button("Membership Sign-In");
 		Button memberLoginButton = new Button("Membership Login");
-		Button guestLoginButton = new Button("Continue as Guess");
+		Button guestLoginButton = new Button("Guest Order");
+		Button drinkMenuButton = new Button("Drink Menu");
 		Button exitButton = new Button("Exit");
 		
-		/*-------------------------------------------------- */
+		
 		HBox hbox = new HBox();
-		hbox.getChildren().addAll(memberLoginButton, guestLoginButton, exitButton);
-		hbox.setSpacing(5.0);
-		hbox.setAlignment(Pos.CENTER);
-		/*-------------------------------------------------- */
+		hbox.getChildren().addAll(memberSignInButton, memberLoginButton, guestLoginButton, drinkMenuButton, exitButton);
+		hbox.setAlignment(Pos.BOTTOM_CENTER);
+
 		BorderPane bp = new BorderPane();
 		bp.setId("StartUpWindow");
 		bp.setCenter(hbox);
 		
-		/*-------------------------------------------------- */
-		Scene scene1 =  new Scene(bp, 900,373);//373
-		scene1.getStylesheets().add("style.css");
+		Scene scene1 =  new Scene(bp, 700,373);//373
+		scene1.getStylesheets().add("displayStyle.css");
 		
-		
-		/*-------------------------------------------------- */
 		window.setScene(scene1);
 		window.show();
 		
-		/*-------------------------------------------------- */
 		
 		memberLoginButton.setOnAction(e->
 		{
@@ -60,7 +56,15 @@ public class StartUpWindow extends Application
 				window.close();
 			}
 		});
-		/*-------------------------------------------------- */
+		
+		memberSignInButton.setOnAction(e->
+		{
+			if(e.getSource() == memberSignInButton)
+			{
+				ViewHandler.displaySignUp();
+			}
+		});
+		
 		guestLoginButton.setOnAction(e->
 		{
 			if(e.getSource() == guestLoginButton)
@@ -68,19 +72,18 @@ public class StartUpWindow extends Application
 				GuestLogin guestLogin = new GuestLogin();
 				guestLogin.displayMenu();
 			}
-		
 		});
-		/*-------------------------------------------------- */
-//		button3.setOnAction(e->
-//		{
-//			if (e.getSource() == button3)
-//			{
-//				ViewHandler.displayDrinkMenu();
-//			}
-//
-//		});
+
+		drinkMenuButton.setOnAction(e->
+		{
+			if (e.getSource() == drinkMenuButton)
+			{
+				ViewHandler.displayDrinkMenu();
+				MenuWindow displayMenu = new MenuWindow();
+				displayMenu.menuDisplayPage("General ");
+			}
+		});
 		
-		/*-------------------------------------------------- */
 		exitButton.setOnAction(e->
 		{
 			if (e.getSource() == exitButton)
@@ -88,12 +91,9 @@ public class StartUpWindow extends Application
 				window.close();
 				e.consume();
 			}
-		});
-		/*-------------------------------------------------- */
-		
+		});		
 	}
 
-	
 	public static void main(String[] args)
 	{
 		launch(args);
