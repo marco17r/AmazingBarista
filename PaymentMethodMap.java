@@ -5,13 +5,13 @@ public class PaymentMethodMap
 	//Standard Payment Method Array
 	PaymentMethod mapOfPaymentMethods[] = 
 	{
-			new PaymentMethod(0,"No payment method used", 0),
-			new PaymentMethod(1,"Cash payment method used", 0),
-			new PaymentMethod(2,"Paper Check payment method used", 0),
-			new PaymentMethod(3,"Visa payment method used", 0),
-			new PaymentMethod(4,"MasterCard payment method used", 0),
-			new PaymentMethod(5,"Discovery payment method used", 0),
-			new PaymentMethod(6,"AMEX payment method used", 0),
+			new PaymentMethod(0,"No payment", 0),
+			new PaymentMethod(1,"Cash payment", 0),
+			new PaymentMethod(2,"Paper Check", 0),
+			new PaymentMethod(3,"Visa Card", 0),
+			new PaymentMethod(4,"Master Card", 0),
+			new PaymentMethod(5,"Discover Card", 0),
+			new PaymentMethod(6,"AMEX", 0),
 	};
 	
 	//Default Constructor not necessarily needed yet.

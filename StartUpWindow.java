@@ -8,14 +8,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
-import java.awt.Color;
-import java.awt.Paint;
-import java.awt.color.*;
-
 //Class displays the main window
 public class StartUpWindow extends Application
 {
-	Stage window;
+	Stage startUpWindow;
 	
 	//Initializes the application
 	//@param stage
@@ -23,85 +19,81 @@ public class StartUpWindow extends Application
 	@Override
 	public void start(Stage primaryStage) throws Exception 
 	{
-		window = primaryStage;
-		window.setOnCloseRequest(e ->
+		startUpWindow = primaryStage;
+		startUpWindow.setTitle("Login Page");
+		startUpWindow.setOnCloseRequest(event ->
 		{
-			e.consume();
+			event.consume();
 		});
+
+		Button memberSignInButton = new Button("Membership Sign-In");
+		Button memberLoginButton = new Button("Membership Login");
+		Button guestLoginButton = new Button("Guest Order");
+		Button drinkMenuButton = new Button("Drink Menu");
+		Button exitButton = new Button("Exit");
 		
-		/*-------------------------------------------------- */
-		Button button1 = new Button("Membership Login");
-		Button button2 = new Button("Membership Sign-Up");
-		Button button3 = new Button("Guest Order");
-		Button button4 = new Button("Drink Menu");
-		Button button5 = new Button("Exit");
 		
-		/*-------------------------------------------------- */
-		HBox hbox = new HBox();
-		hbox.getChildren().addAll(button1, button2, button3, button4, button5);	
-		hbox.setAlignment(Pos.BOTTOM_CENTER);
-		
-		/*-------------------------------------------------- */
+		HBox horizontalBox = new HBox();
+		horizontalBox.getChildren().addAll(memberSignInButton, memberLoginButton, guestLoginButton, drinkMenuButton, exitButton);
+		horizontalBox.setAlignment(Pos.BOTTOM_CENTER);
+
 		BorderPane bp = new BorderPane();
 		bp.setId("StartUpWindow");
-		bp.setCenter(hbox);
+		bp.setCenter(horizontalBox);
 		
-		/*-------------------------------------------------- */
-		Scene scene1 =  new Scene(bp, 700, 353);//373
-		scene1.getStylesheets().add("displayStyle.css");
+		Scene startUpScene =  new Scene(bp,700,373);
+		startUpScene.getStylesheets().add("displayStyle.css");
 		
-		/*-------------------------------------------------- */
-		window.setScene(scene1);
-		window.show();
+		startUpWindow.setScene(startUpScene);
+		startUpWindow.show();
 		
-		/*-------------------------------------------------- */
 		
-		button1.setOnAction(e-> 
+		memberLoginButton.setOnAction(event->
 		{
-			if (e.getSource() == button1)
+			if (event.getSource() == memberLoginButton)
 			{
-				ViewHandler.displayLogIn();
+				MemberLogin.displayLogIn();
+				startUpWindow.close();
 			}
 		});
-		/*-------------------------------------------------- */
-		button2.setOnAction(e-> 
+		
+		memberSignInButton.setOnAction(event->
 		{
-			if(e.getSource() == button2)
+			if(event.getSource() == memberSignInButton)
 			{
 				ViewHandler.displaySignUp();
 			}
-		
 		});
-		/*-------------------------------------------------- */
-		button3.setOnAction(e-> 
+		
+		guestLoginButton.setOnAction(event->
 		{
-			if (e.getSource() == button3)
+			if(event.getSource() == guestLoginButton)
 			{
-				//ViewHandler.startOrder("Enter Name");
+				GuestLogin guestLogin = new GuestLogin();
+				guestLogin.displayMenu();
 			}
-			
 		});
-		
-		/*-------------------------------------------------- */
-		button4.setOnAction(e-> 
+
+		drinkMenuButton.setOnAction(event->
 		{
-			if (e.getSource() == button4)
+			if (event.getSource() == drinkMenuButton)
 			{
 				ViewHandler.displayDrinkMenu();
+				MenuWindow displayMenu = new MenuWindow();
+				displayMenu.menuDisplayWindow("General ");
 			}
 		});
-		/*-------------------------------------------------- */
-		button5.setOnAction(e->
+		
+		exitButton.setOnAction(event->
 		{
-			if(e.getSource() == button5)
+			if (event.getSource() == exitButton)
 			{
-				window.close();
-				e.consume();
+				startUpWindow.close();
+				event.consume();
 			}
-		});
+		});		
 	}
 
-	
 	public static void main(String[] args)
 	{
 		launch(args);

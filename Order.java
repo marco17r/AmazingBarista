@@ -1,10 +1,11 @@
 package model;
 
+import java.math.BigDecimal;
 import java.util.Scanner;
 
 public class Order extends AbstractModel
 {
-	private float subtotal;
+	private BigDecimal subtotal;
 	public static double runningTotal;
 	private static double itemPrice;
 	private static int itemQuality;
@@ -18,7 +19,7 @@ public class Order extends AbstractModel
 	//Empty array of 5 elements
 	public Order()
 	{
-		subtotal = 0;
+		subtotal = BigDecimal.ZERO;
 		arraySize = 5;
 		orderSize = 0;
 		order = new Drink[arraySize];
@@ -26,7 +27,7 @@ public class Order extends AbstractModel
 	}
 	
 	//Constructor with arguments
-	public Order(float OrderSTotal, int orderArraySize, int orderOSize, Drink[] orderArray)
+	public Order(BigDecimal OrderSTotal, int orderArraySize, int orderOSize, Drink[] orderArray)
 	{
 		subtotal = OrderSTotal;
 		arraySize = orderArraySize;
@@ -35,42 +36,42 @@ public class Order extends AbstractModel
 		System.out.println("New Order started!");
 	}
 	//Method to add drinks to order
-	public void addToOrder(Drink orderItem)
+	public void addToOrder(Drink orderItem, BigDecimal itemQuality)
 	{
 		order[orderSize] = orderItem;
-		subtotal += order[orderSize].getPrice();
-		orderSize++;
+		subtotal = subtotal.add(order[orderSize].getPrice().multiply(itemQuality));
 		System.out.println("added the following drink to the order: " + order[orderSize].getName());
-		ModelEvent me = new ModelEvent(orderItem,0,"order item added",0);
+		ModelEvent me = new ModelEvent(orderItem,0,"order item added",order[orderSize].getPrice());
+		orderSize++;
 		notifyChanged(me);
 	}
 	//Method to remove a drink by it's position index in the order drinks array.
 	public void removeFromOrder(int removeIndex)
 	{
 		//remove the Item price from the subtotal
-		subtotal -= order[removeIndex].getPrice();
+		subtotal = subtotal.subtract(order[removeIndex].getPrice());
 		//filled in the gap in the array from the removal
 		for(int i = removeIndex; i < orderSize; i++)
 		{
 			order[i] = order[i+1];
 		}
 		order[orderSize] = null;
-		orderSize--;
 		System.out.println("Removing from order confirmed!");
-		ModelEvent me = new ModelEvent(this,0,"order removed",0);
+		ModelEvent me = new ModelEvent(this,0,"order removed",order[orderSize].getPrice());
+		orderSize--;
 		notifyChanged(me);
 	}
 	//Method to start a new order
 	public void clearOrder()
 	{
-		subtotal = 0;
+		subtotal = BigDecimal.ZERO;
 		orderSize = 0;
 		System.out.println("Starting a new order");
-		ModelEvent me = new ModelEvent(this,0,"New Order",0);
+		ModelEvent me = new ModelEvent(this,0,"New Order", BigDecimal.ZERO);
 		notifyChanged(me);
 	}
 	//Accessor Method to get an order total.
-	public float getOrderTotal()
+	public BigDecimal getOrderTotal()
 	{
 		System.out.println("Order Total is: " + subtotal);
 		return subtotal;
