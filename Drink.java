@@ -1,8 +1,6 @@
 package model;
 
-import java.math.BigDecimal;
-
-public class Drink
+public class Drink 
 {
 
 	// name of drink
@@ -10,7 +8,7 @@ public class Drink
 	// drink's description
 	private String description;
 	// drink's price
-	private BigDecimal price;
+	private float price;
 
 	// Default Constructor without arguments
 	// generation of sample item:
@@ -19,12 +17,12 @@ public class Drink
 		name = "AbstractDrink";
 		System.out.println("Generating the following drink: " + name);
 		description = "Example Drink Item Generated";
-		price = new BigDecimal("0.0");
+		price = 0;
 		System.out.println("Confirmation of generation of the following drink: " + name);
 	}
 
 	//Overloaded Constructor with parameter arguments
-	public Drink(String drinkName, String drinkDescription, BigDecimal drinkPrice)
+	public Drink(String drinkName, String drinkDescription, float drinkPrice) 
 	{
 		name = drinkName;
 		System.out.println("Generating the following drink: " + drinkName);
@@ -59,14 +57,14 @@ public class Drink
 		return description;
 	}
 	//Mutator Method for setting a drink's price.
-	public void setPrice(BigDecimal priceToSet)
+	public void setPrice(float priceToSet) 
 	{
 		System.out.println("Setting the drink price too : " + priceToSet);
 		price = priceToSet;
 		System.out.println("Confirmation for setting the drink price too : " + priceToSet);
 	}
 	//Accessor Method to get a drink's price.
-	public BigDecimal getPrice()
+	public float getPrice() 
 	{
 		System.out.println("Retrieving the price of the drink :" + price);
 		return price;

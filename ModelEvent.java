@@ -1,19 +1,18 @@
 package model;
 
 import java.awt.event.ActionEvent;
-import java.math.BigDecimal;
 
 public class ModelEvent extends ActionEvent
 {
-	private BigDecimal amount;
+	private int amount;
 	
-	public ModelEvent(Object obj, int id, String message, BigDecimal amount)
+	public ModelEvent(Object obj, int id, String message, int amount)
 	{
 		super(obj, id, message);
 		this.amount = amount;
 	}
 	
-	public BigDecimal getAmount()
+	public int getAmount()
 	{
 		return amount;
 	}

@@ -8,6 +8,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
+import java.awt.Color;
+import java.awt.Paint;
+import java.awt.color.*;
+
 //Class displays the main window
 public class StartUpWindow extends Application
 {
@@ -20,80 +24,84 @@ public class StartUpWindow extends Application
 	public void start(Stage primaryStage) throws Exception 
 	{
 		window = primaryStage;
-		window.setTitle("Login Page");
 		window.setOnCloseRequest(e ->
 		{
 			e.consume();
 		});
-
-		Button memberSignInButton = new Button("Membership Sign-In");
-		Button memberLoginButton = new Button("Membership Login");
-		Button guestLoginButton = new Button("Guest Order");
-		Button drinkMenuButton = new Button("Drink Menu");
-		Button exitButton = new Button("Exit");
 		
+		/*-------------------------------------------------- */
+		Button button1 = new Button("Membership Login");
+		Button button2 = new Button("Membership Sign-Up");
+		Button button3 = new Button("Guest Order");
+		Button button4 = new Button("Drink Menu");
+		Button button5 = new Button("Exit");
 		
+		/*-------------------------------------------------- */
 		HBox hbox = new HBox();
-		hbox.getChildren().addAll(memberSignInButton, memberLoginButton, guestLoginButton, drinkMenuButton, exitButton);
+		hbox.getChildren().addAll(button1, button2, button3, button4, button5);	
 		hbox.setAlignment(Pos.BOTTOM_CENTER);
-
+		
+		/*-------------------------------------------------- */
 		BorderPane bp = new BorderPane();
 		bp.setId("StartUpWindow");
 		bp.setCenter(hbox);
 		
-		Scene scene1 =  new Scene(bp, 700,373);//373
+		/*-------------------------------------------------- */
+		Scene scene1 =  new Scene(bp, 700, 353);//373
 		scene1.getStylesheets().add("displayStyle.css");
 		
+		/*-------------------------------------------------- */
 		window.setScene(scene1);
 		window.show();
 		
+		/*-------------------------------------------------- */
 		
-		memberLoginButton.setOnAction(e->
+		button1.setOnAction(e-> 
 		{
-			if (e.getSource() == memberLoginButton)
+			if (e.getSource() == button1)
 			{
-				MemberLogin.displayLogIn();
-				window.close();
+				ViewHandler.displayLogIn();
 			}
 		});
-		
-		memberSignInButton.setOnAction(e->
+		/*-------------------------------------------------- */
+		button2.setOnAction(e-> 
 		{
-			if(e.getSource() == memberSignInButton)
+			if(e.getSource() == button2)
 			{
 				ViewHandler.displaySignUp();
 			}
+		
+		});
+		/*-------------------------------------------------- */
+		button3.setOnAction(e-> 
+		{
+			if (e.getSource() == button3)
+			{
+				//ViewHandler.startOrder("Enter Name");
+			}
+			
 		});
 		
-		guestLoginButton.setOnAction(e->
+		/*-------------------------------------------------- */
+		button4.setOnAction(e-> 
 		{
-			if(e.getSource() == guestLoginButton)
-			{
-				GuestLogin guestLogin = new GuestLogin();
-				guestLogin.displayMenu();
-			}
-		});
-
-		drinkMenuButton.setOnAction(e->
-		{
-			if (e.getSource() == drinkMenuButton)
+			if (e.getSource() == button4)
 			{
 				ViewHandler.displayDrinkMenu();
-				MenuWindow displayMenu = new MenuWindow();
-				displayMenu.menuDisplayPage("General ");
 			}
 		});
-		
-		exitButton.setOnAction(e->
+		/*-------------------------------------------------- */
+		button5.setOnAction(e->
 		{
-			if (e.getSource() == exitButton)
+			if(e.getSource() == button5)
 			{
 				window.close();
 				e.consume();
 			}
-		});		
+		});
 	}
 
+	
 	public static void main(String[] args)
 	{
 		launch(args);
