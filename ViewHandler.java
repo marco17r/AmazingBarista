@@ -29,127 +29,129 @@ import javafx.geometry.Pos;
  	//Class for displaying the sign-up window
 	public static void displaySignUp()
 	{
-		Stage window = new Stage();
+		Stage signUpWindow = new Stage();
 		//Block events to other windows
-		window.initModality(Modality.APPLICATION_MODAL);
-		window.setTitle("Member Sign-Up");
-		window.setMinWidth(250);
+		signUpWindow.initModality(Modality.APPLICATION_MODAL);
+		signUpWindow.setTitle("Member Sign-Up");
+		signUpWindow.setMinWidth(250);
 		Label newNameLabel = new Label("Name :");
-		TextField newNameInput = new TextField();
+		TextField newNameTextField = new TextField();
 		Label newPassLabel = new Label("Password :");
-		TextField newPassWordInput = new TextField();
+		TextField newPassWordTextField = new TextField();
 		//Member Sign-Up button
 		Button signUpButton = new Button("Sign-Up");
 		signUpButton.setOnAction( e ->
 		{
-			ViewHandler.userName = (String) newNameInput.getText();
-			ViewHandler.userPass = (String) newPassWordInput.getText();
-			window.close();
+			ViewHandler.userName = (String) newNameTextField.getText();
+			ViewHandler.userPass = (String) newPassWordTextField.getText();
+			signUpWindow.close();
 		});
 		//Cancel Sign-Up Button
 		Button cancelButton = new Button("Cancel");
-		cancelButton.setOnAction(e -> window.close());
+		cancelButton.setOnAction(e -> signUpWindow.close());
 
- 		VBox layout = new VBox(10);
-		layout.setPadding(new Insets(20, 20, 20, 20));
-		layout.getChildren().addAll(newNameLabel, newNameInput, newPassLabel, newPassWordInput, signUpButton, cancelButton);
-		layout.setAlignment(Pos.CENTER_LEFT);
+ 		VBox verticleBoxlayout = new VBox(10);
+		verticleBoxlayout.setPadding(new Insets(20, 20, 20, 20));
+		verticleBoxlayout.getChildren().addAll(newNameLabel, newNameTextField, newPassLabel, newPassWordTextField, signUpButton, cancelButton);
+		verticleBoxlayout.setAlignment(Pos.CENTER_LEFT);
 
- 		Scene scene = new Scene(layout);
-		window.setScene(scene);
-		window.showAndWait();
+ 		Scene signUpScene = new Scene(verticleBoxlayout);
+		signUpWindow.setScene(signUpScene);
+		signUpWindow.showAndWait();
 	}
 
 
  	//Class for displaying the log-in window
 	public static void displayLogIn()
 	{
-		Stage window = new Stage();
+		Stage logInWindow = new Stage();
 		//Block events to other windows
-		window.initModality(Modality.APPLICATION_MODAL);
-		window.setTitle("Member Login");
-		window.setMinWidth(250);
+		logInWindow.initModality(Modality.APPLICATION_MODAL);
+		logInWindow.setTitle("Member Login");
+		logInWindow.setMinWidth(250);
 		Label NameLabel = new Label("Name :");
 		//Text Field for user name input
-		TextField userNameInput = new TextField();
+		TextField userNameTextField = new TextField();
 		Label PassLabel = new Label("Password :");
 		//Text field for user name password
-		TextField userPassWordInput = new TextField();
+		TextField userPassWordTextField = new TextField();
 		//Member Login Button
 		Button logInButton = new Button("Login");
 		logInButton.setOnAction( e ->
 		{
-			ViewHandler.userName = (String) userNameInput.getText();
-			ViewHandler.userPass = (String) userPassWordInput.getText();
-			window.close();
+			ViewHandler.userName = (String) userNameTextField.getText();
+			ViewHandler.userPass = (String) userPassWordTextField.getText();
+			logInWindow.close();
 		});
 		//Exit Button
 		Button cancelButton = new Button("Cancel");
-		cancelButton.setOnAction(e -> window.close());
+		cancelButton.setOnAction(e -> logInWindow.close());
 		//Display Set-up?
-		VBox layout = new VBox(10);
-		layout.setPadding(new Insets(20, 20, 20, 20));
-		layout.getChildren().addAll(NameLabel, userNameInput, PassLabel,userPassWordInput, logInButton, cancelButton);
-		layout.setAlignment(Pos.TOP_LEFT);
+		VBox verticleBoxLayout = new VBox(10);
+		verticleBoxLayout.setPadding(new Insets(20, 20, 20, 20));
+		verticleBoxLayout.getChildren().addAll(NameLabel, userNameTextField, PassLabel,userPassWordTextField, logInButton, cancelButton);
+		verticleBoxLayout.setAlignment(Pos.TOP_LEFT);
 		//Display login window and wait for it to be cancelled before returning.
-		Scene scene = new Scene(layout);
-		scene.setFill(Color.GREENYELLOW);
-		window.setScene(scene);
-		window.showAndWait();
+		Scene logInScene = new Scene(verticleBoxLayout);
+		logInScene.setFill(Color.GREENYELLOW);
+		logInWindow.setScene(logInScene);
+		logInWindow.showAndWait();
 	}
 
 
  	//Class for displaying the Menu for Drinks window
 	public static void displayDrinkMenu()
 	{
-		Stage window = new Stage();
+		Stage displayDrinkMenuWindow = new Stage();
 		//Block events to other windows
-		window.initModality(Modality.APPLICATION_MODAL);
+		displayDrinkMenuWindow.initModality(Modality.APPLICATION_MODAL);
 		//sets the window title to the parameter argument above
-		window.setTitle("Drink Menu");
+		displayDrinkMenuWindow.setTitle("Drink Menu");
 		//sets the minimum width of the drink menu window
-		window.setMinWidth(250);
+		displayDrinkMenuWindow.setMinWidth(250);
 		//GameController gc = new GameController();
 		//gc.getLeaderBoard();
 
  		TableColumn <Object, String> drinkNameColumn = new TableColumn<> ("Drink");
 		drinkNameColumn.setMinWidth(200);
-		drinkNameColumn.setCellValueFactory(new PropertyValueFactory <> ("drink Name"));
+		drinkNameColumn.setCellValueFactory(new PropertyValueFactory <> ("Drink Name"));
 
  		TableColumn <Object, String> drinkDescriptionColumn = new TableColumn<> ("Description");
 		drinkDescriptionColumn.setMinWidth(200);
-		drinkDescriptionColumn.setCellValueFactory(new PropertyValueFactory <> ("playerName"));
+		drinkDescriptionColumn.setCellValueFactory(new PropertyValueFactory <> ("Drink Description"));
 
  		TableColumn <Object, Integer> drinkPriceColumn = new TableColumn<> ("Price");
 		drinkPriceColumn.setMinWidth(200);
-		drinkPriceColumn.setCellValueFactory(new PropertyValueFactory <> ("drink price"));
+		drinkPriceColumn.setCellValueFactory(new PropertyValueFactory <> ("Drink price"));
 
- 		//TableRow <Object, Integer> drinkNameRow0 = new TableRow<> ("Water");
-		//drinkNameRow0.setMinWidth(200);
-		//drinkNameRow0.setCellValueFactory(new PropertyValueFactory <> ("water"));
+ 		//TableRow drinkNameRow0 = new TableRow (null);
+		//drinkNameRow0.equals(obj)
+		//setCellValueFactory(new PropertyValueFactory <> ("water"));
 		
 		Inventory inv = new Inventory();
-		TableView <Object> table = new TableView <Object>();
-		HBox layout = new HBox(10);
+		TableView <Object> drinkMenuTable = new TableView <Object>();
+		HBox horizontalBoxLayout = new HBox(10);
         Map<String, Drink> mapOfDrinks = inv.storeDefaultDrinkMenu();
 
         for (String itemName : mapOfDrinks.keySet()) 
         {
             Drink drink = mapOfDrinks.get(itemName);
-            layout.getChildrenUnmodifiable().addAll(createDrinkMenuItems(drink.getName(), drink.getDescription(), String.valueOf(drink.getPrice())));
+            //horizontalBoxLayout.getChildrenUnmodifiable().addAll(createDrinkMenuItems(drink.getName(), drink.getDescription(), String.valueOf(drink.getPrice())));
             //table.setParent(Pos.CENTER_LEFT);
+            horizontalBoxLayout.getChildren().addAll(createDrinkMenuItems(drink.getName(), drink.getDescription(), String.valueOf(drink.getPrice())));
         }
  		
-		table.getColumns().add(drinkNameColumn);
-		table.getColumns().add(drinkDescriptionColumn);
-		table.getColumns().add(drinkPriceColumn);
-		VBox vbox = new VBox();
-		vbox.getChildren().add(table);
+		drinkMenuTable.getColumns().add(drinkNameColumn);
+		drinkMenuTable.getColumns().add(drinkDescriptionColumn);
+		drinkMenuTable.getColumns().add(drinkPriceColumn);
+		//drinkMenuTable.getRowFactory().add(horizontalBoxLayout);
+		VBox verticleBox = new VBox();
+		verticleBox.getChildren().add(drinkMenuTable);
 
- 		Scene scene = new Scene(vbox);
-		scene.setFill(Color.RED);
-		window.setScene(scene);
-		window.show();
+ 		Scene drinkMenuScene = new Scene(verticleBox);
+		drinkMenuScene.setFill(Color.RED);
+		displayDrinkMenuWindow.setScene(drinkMenuScene);
+		displayDrinkMenuWindow.show();
 	}
 
 
@@ -168,18 +170,18 @@ import javafx.geometry.Pos;
 	
 	private static HBox createDrinkMenuItems(String drinkTitleItem, String drinkDescriptionItem, String drinkPriceItem) 
     {
-        HBox hbox = new HBox();
-        hbox.getChildren().add(new Label(drinkTitleItem));
-        hbox.setSpacing(50.0);
-        hbox.setAlignment(Pos.CENTER_LEFT);
+        HBox horizontalBox = new HBox();
+        horizontalBox.getChildren().add(new Label(drinkTitleItem));
+        //horizontalBox.setSpacing(50.0);
+        //horizontalBox.setAlignment(Pos.CENTER_LEFT);
         
-        hbox.getChildren().add(new Label(drinkDescriptionItem));
-        hbox.setSpacing(50.0);
-        hbox.setAlignment(Pos.CENTER_LEFT);
+        horizontalBox.getChildren().add(new Label(drinkDescriptionItem));
+        //horizontalBox.setSpacing(50.0);
+        //horizontalBox.setAlignment(Pos.CENTER_LEFT);
         
-        hbox.getChildren().add(new Label(drinkPriceItem));
-        hbox.setSpacing(50.0);
-        hbox.setAlignment(Pos.CENTER);
-        return hbox;
+        horizontalBox.getChildren().add(new Label(drinkPriceItem));
+        horizontalBox.setSpacing(50.0);
+        horizontalBox.setAlignment(Pos.CENTER);
+        return horizontalBox;
     }
 } 

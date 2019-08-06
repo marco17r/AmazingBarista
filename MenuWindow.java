@@ -28,18 +28,18 @@ public class MenuWindow
     private Map<String, Button> mapOfAddButtons = new HashMap<>();
     private Map<String, Button> mapOfClearButtons = new HashMap<>();
 
-    public void menuDisplayPage(String userType) 
+    public void menuDisplayWindow(String userType) 
     {
-        Stage window = new Stage();
+        Stage displayMenuWindow = new Stage();
         //Block events to other windows
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle(userType + " Menu Page");
-        window.setMinWidth(800);
-        window.setMaxWidth(1000);
+        displayMenuWindow.initModality(Modality.APPLICATION_MODAL);
+        displayMenuWindow.setTitle(userType + " Menu Page");
+        displayMenuWindow.setMinWidth(800);
+        displayMenuWindow.setMaxWidth(1000);
 
-        VBox layout = new VBox(10);
-        layout.setPadding(new Insets(20, 20, 20, 20));
-        layout.getChildren().add(createDrinkTitle("Drink", "Description", "Price", "Quantity"));
+        VBox verticleBoxLayOut = new VBox(10);
+        verticleBoxLayOut.setPadding(new Insets(20, 20, 20, 20));
+        verticleBoxLayOut.getChildren().add(createDrinkTitle("Drink", "Description", "Price", "Quantity"));
         //layout.setAlignment(Pos.TOP_CENTER);
         Inventory inv = new Inventory();
 
@@ -50,8 +50,8 @@ public class MenuWindow
         for (String itemName : mapOfDrinks.keySet()) 
         {
             Drink drink = mapOfDrinks.get(itemName);
-            layout.getChildren().addAll(createDrinkMenuItems(drink.getName(), drink.getDescription(), String.valueOf(drink.getPrice())));
-            layout.setAlignment(Pos.CENTER_LEFT);
+            verticleBoxLayOut.getChildren().addAll(createDrinkMenuItems(drink.getName(), drink.getDescription(), String.valueOf(drink.getPrice())));
+            //verticleBoxLayOut.setAlignment(Pos.CENTER_LEFT);
         }
 
         for (String drinkName : mapOfAddButtons.keySet()) 
@@ -61,7 +61,7 @@ public class MenuWindow
                     Drink drink = mapOfDrinks.get(drinkName);
                     BigDecimal itemQuantity = new BigDecimal(mapOfTextInputs.get(drink.getName()).getText());
                     customerOrder.addToOrder(drink, itemQuantity);
-                    totalPriceText.setText(String.valueOf(customerOrder.getOrderTotal()));
+                    totalPriceText.setText("$" + String.valueOf(customerOrder.getOrderTotal()));
             });
         }
 
@@ -78,63 +78,54 @@ public class MenuWindow
         Button submitButton = new Button("Submit");
         submitButton.setOnAction(e -> 
         {
-            window.close();
+            displayMenuWindow.close();
         });
 
-        layout.getChildren().addAll(submitButton, totalPriceText);
+        verticleBoxLayOut.getChildren().addAll(submitButton, totalPriceText);
         //layout.setAlignment(Pos.TOP_LEFT);
         //Display login window and wait for it to be cancelled before returning.
-        Scene scene = new Scene(layout);
-        window.setScene(scene);
-        window.showAndWait();
+        Scene menuDisplayScene = new Scene(verticleBoxLayOut);
+        displayMenuWindow.setScene(menuDisplayScene);
+        displayMenuWindow.showAndWait();
     }
 
     private static HBox createDrinkTitle(String drinkTitle, String descriptionTitle, String priceTitle, String quantityTitle) 
     {
-        HBox hbox = new HBox();
-        hbox.getChildren().add(new Label(drinkTitle));
-        hbox.setSpacing(400);
-        //hbox.setAlignment(Pos.TOP_LEFT);
-        hbox.getChildren().add(new Label(descriptionTitle));
-        hbox.setSpacing(300);
-        //hbox.setAlignment(Pos.TOP_LEFT);
-        hbox.getChildren().add(new Label(priceTitle));
-        hbox.setSpacing(200);
-        //hbox.setAlignment(Pos.TOP_CENTER);
-        hbox.getChildren().add(new Label(quantityTitle));
-        hbox.setSpacing(100);
-        hbox.setAlignment(Pos.TOP_LEFT);
-        return hbox;
+        HBox horizontalBox = new HBox();
+        horizontalBox.getChildren().add(new Label(drinkTitle));
+        horizontalBox.getChildren().add(new Label(descriptionTitle));
+        horizontalBox.getChildren().add(new Label(priceTitle));
+        horizontalBox.getChildren().add(new Label(quantityTitle));
+        horizontalBox.setSpacing(111);
+        horizontalBox.setAlignment(Pos.TOP_LEFT);
+        return horizontalBox;
     }
 
     public HBox createDrinkMenuItems(String drinkTitleItem, String drinkDescriptionItem, String drinkPriceItem) 
     {
-        HBox hbox = new HBox();
-        hbox.getChildren().add(new Label(drinkTitleItem));
-        hbox.setSpacing(50.0);
-        hbox.setAlignment(Pos.CENTER_LEFT);
-        
-        hbox.getChildren().add(new Label(drinkDescriptionItem));
-        hbox.setSpacing(50.0);
-        hbox.setAlignment(Pos.CENTER_LEFT);
-        
-        hbox.getChildren().add(new Label(drinkPriceItem));
-        hbox.setSpacing(50.0);
-        hbox.setAlignment(Pos.CENTER);
-        
+        HBox horizontalBox = new HBox();
+        horizontalBox.getChildren().add(new Label(drinkTitleItem));
+        horizontalBox.getChildren().add(new Label(drinkDescriptionItem));
+        horizontalBox.getChildren().add(new Label(drinkPriceItem));
         TextField quantity = new TextField();
-        hbox.getChildren().add(quantity);
+        horizontalBox.getChildren().add(quantity);
         mapOfTextInputs.put(drinkTitleItem, quantity);
-        hbox.setSpacing(50.0);
-        hbox.setAlignment(Pos.CENTER_RIGHT);
+        horizontalBox.setSpacing(70);
+        horizontalBox.setAlignment(Pos.CENTER);
 
         Button addToCartButton = new Button("Add To Cart");
-        hbox.getChildren().add(addToCartButton);
+        horizontalBox.getChildren().add(addToCartButton);
         mapOfAddButtons.put(drinkTitleItem, addToCartButton);
 
         Button clearCartButton = new Button("Clear Cart");
-        hbox.getChildren().add(clearCartButton);
+        horizontalBox.getChildren().add(clearCartButton);
         mapOfClearButtons.put(drinkTitleItem, clearCartButton);
-        return hbox;
+        
+        //Styling nodes  
+        addToCartButton.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;"); 
+        clearCartButton.setStyle("-fx-background-color: darkslateblue; -fx-text-fill: white;"); 
+        quantity.setStyle("-fx-font: semi bold 11px 'times new roman' "); 
+        horizontalBox.setStyle("-fx-background-color:BEIGE;");
+        return horizontalBox;
     }
 }
