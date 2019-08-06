@@ -18,26 +18,26 @@ public class CheckoutPage
 
     public void payment()
     { 
-        Stage window = new Stage();
+        Stage paymentWindow = new Stage();
         //Block events to other windows
-        window.initModality(Modality.APPLICATION_MODAL);
-        window.setTitle("Member Login");
-        window.setMinWidth(800);
-        window.setMaxWidth(1000);
+        paymentWindow.initModality(Modality.APPLICATION_MODAL);
+        paymentWindow.setTitle("Member Login");
+        paymentWindow.setMinWidth(800);
+        paymentWindow.setMaxWidth(1000);
 
-        VBox layout = new VBox(10);
-        layout.setPadding(new Insets(20, 20, 20, 20));
+        VBox verticleBoxLayout = new VBox(10);
+        verticleBoxLayout.setPadding(new Insets(20, 20, 20, 20));
         Label firstNameLabel = new Label("FirstName:");
         Label lastNameLabel = new Label("LastName:");
-        TextField firstNameText = new TextField();
-        TextField lastNameText = new TextField();
+        TextField firstNameTextField = new TextField();
+        TextField lastNameTextField = new TextField();
         Button submitButton = new Button("Submit Payment");
-        Label thankYouText = new Label("Thank You For Ordering with Amazing Barista!");
+        Label thankYouLabel = new Label("Thank You For Ordering with Amazing Barista!");
 
         PaymentMethodMap paymentMethodMap = new PaymentMethodMap();
-        final ComboBox paymentOptions = new ComboBox();
+        final ComboBox paymentOptionsBox = new ComboBox();
 
-        paymentOptions.getItems().addAll(
+        paymentOptionsBox.getItems().addAll(
             paymentMethodMap.getPaymentMethod(0),
             paymentMethodMap.getPaymentMethod(1),
             paymentMethodMap.getPaymentMethod(2),
@@ -48,68 +48,71 @@ public class CheckoutPage
         );
 
 
-        paymentOptions.setOnAction(e -> 
+        paymentOptionsBox.setOnAction(e -> 
         {
-            performActionOnSelectedComboBox((String) paymentOptions.getSelectionModel().getSelectedItem());
+            performActionOnSelectedComboBox((String) paymentOptionsBox.getSelectionModel().getSelectedItem());
         });
 
         submitButton.setOnAction(e ->
         {
-                thankYouText.setText("Thank you for your payment...Enjoy your drink");
+                thankYouLabel.setText("Thank you for your payment...Enjoy your drink");
             try 
             {
                 Thread.sleep(10L);
-            } catch (InterruptedException e1) 
+            } 
+            catch (InterruptedException e1) 
             {
                 e1.printStackTrace();
             }
-            window.close();
+            paymentWindow.close();
         });
 
-        layout.getChildren().addAll(firstNameLabel, firstNameText, lastNameLabel, lastNameText, paymentOptions,submitButton,thankYouText);
-        Scene scene = new Scene(layout);
-        window.setScene(scene);
-        window.showAndWait();
+        verticleBoxLayout.getChildren().addAll(firstNameLabel, firstNameTextField, lastNameLabel, lastNameTextField, paymentOptionsBox,submitButton,thankYouLabel);
+        Scene paymentScene = new Scene(verticleBoxLayout);
+        paymentWindow.setScene(paymentScene);
+        paymentWindow.showAndWait();
     }
 
-    private void performActionOnSelectedComboBox(String selectedItem) {
+    private void performActionOnSelectedComboBox(String selectedItem) 
+    {
         switch(selectedItem)
         {
 		    case "Visa Card":
 		    case "Master Card":
 		    case "Discovery Card":
 		    case "AMEX":
-            Stage window = new Stage();
+            Stage comboBoxWindow = new Stage();
             //Block events to other windows
-            window.initModality(Modality.APPLICATION_MODAL);
-            window.setTitle("Member Login");
-            window.setMinWidth(800);
-            window.setMaxWidth(1000);
+            comboBoxWindow.initModality(Modality.APPLICATION_MODAL);
+            comboBoxWindow.setTitle("Member Login");
+            comboBoxWindow.setMinWidth(800);
+            comboBoxWindow.setMaxWidth(1000);
 
-            VBox layout = new VBox();
-            Label cardLabel = new Label("Card Number");
-            TextField cardText = new TextField();
-            Label cardExpiry = new Label("Card Expiry");
+            VBox verticleBoxLayout = new VBox();
+            Label cardNumberLabel = new Label("Card Number");
+            TextField cardNumberTextField = new TextField();
+            Label cardExpiry = new Label("Valid Thru :");
             Label cc = new Label("cc");
             TextField ccNumber = new TextField();
             DatePicker checkInDatePicker = new DatePicker();
-            HBox hBox = new HBox();
-            hBox.getChildren().add(cardExpiry);
-            hBox.setSpacing(10);
-            hBox.getChildren().add(checkInDatePicker);
-            hBox.setSpacing(50);
-            hBox.getChildren().add(cc);
-            hBox.setSpacing(10);
-            hBox.getChildren().add(ccNumber);
-            hBox.setSpacing(50);
-            Button submitCardPayment = new Button("Submit Card Payment");
-            submitCardPayment.setOnAction(e-> window.close());
-            hBox.getChildren().add(submitCardPayment);
-            layout.getChildren().addAll(cardLabel, cardText, hBox);
+            HBox horizontalBox = new HBox();
+            horizontalBox.getChildren().add(cardExpiry);
+            horizontalBox.setSpacing(10);
+            horizontalBox.getChildren().add(checkInDatePicker);
+            horizontalBox.setSpacing(50);
+            horizontalBox.getChildren().add(cc);
+            horizontalBox.setSpacing(10);
+            horizontalBox.getChildren().add(ccNumber);
+            horizontalBox.setSpacing(50);
+            Button submitCardPaymentButton = new Button("Submit Card Payment");
+            submitCardPaymentButton.setOnAction(e-> comboBoxWindow.close());
+            
+            horizontalBox.getChildren().add(submitCardPaymentButton);
+            verticleBoxLayout.getChildren().addAll(cardNumberLabel, cardNumberTextField, horizontalBox);
 
-            Scene scene = new Scene(layout);
-            window.setScene(scene);
-            window.showAndWait();
+            Scene comboBoxScene = new Scene(verticleBoxLayout);
+            comboBoxWindow.setScene(comboBoxScene);
+            comboBoxWindow.showAndWait();
         }
     }
 }
