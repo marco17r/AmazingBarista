@@ -1,12 +1,13 @@
 package model;
 
-import java.math.BigDecimal;
 import java.util.Scanner;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class Order extends AbstractModel
 {
 	private BigDecimal subtotal;
-	public static double runningTotal;
+	public static BigDecimal runningTotal;
 	private static double itemPrice;
 	private static int itemQuality;
 	static boolean ordering = true;
@@ -19,7 +20,8 @@ public class Order extends AbstractModel
 	//Empty array of 5 elements
 	public Order()
 	{
-		subtotal = BigDecimal.ZERO;
+		new BigDecimal("0.0");
+		subtotal = new BigDecimal("0.0");
 		arraySize = 5;
 		orderSize = 0;
 		order = new Drink[arraySize];
@@ -36,12 +38,12 @@ public class Order extends AbstractModel
 		System.out.println("New Order started!");
 	}
 	//Method to add drinks to order
-	public void addToOrder(Drink orderItem, BigDecimal itemQuality)
+	public void addToOrder(Drink orderItem, BigDecimal drinkQuality)
 	{
 		order[orderSize] = orderItem;
-		subtotal = subtotal.add(order[orderSize].getPrice().multiply(itemQuality));
+		subtotal = subtotal.add(order[orderSize].getPrice().multiply(drinkQuality));
 		System.out.println("added the following drink to the order: " + order[orderSize].getName());
-		ModelEvent me = new ModelEvent(orderItem,0,"order item added",order[orderSize].getPrice());
+		ModelEvent me = new ModelEvent(orderItem,0,"order item added",0);
 		orderSize++;
 		notifyChanged(me);
 	}
@@ -57,17 +59,17 @@ public class Order extends AbstractModel
 		}
 		order[orderSize] = null;
 		System.out.println("Removing from order confirmed!");
-		ModelEvent me = new ModelEvent(this,0,"order removed",order[orderSize].getPrice());
+		ModelEvent me = new ModelEvent(this,0,"order removed",0);
 		orderSize--;
 		notifyChanged(me);
 	}
 	//Method to start a new order
 	public void clearOrder()
 	{
-		subtotal = BigDecimal.ZERO;
+		subtotal = new BigDecimal("0.0");
 		orderSize = 0;
 		System.out.println("Starting a new order");
-		ModelEvent me = new ModelEvent(this,0,"New Order", BigDecimal.ZERO);
+		ModelEvent me = new ModelEvent(this,0,"New Order",0);
 		notifyChanged(me);
 	}
 	//Accessor Method to get an order total.
@@ -119,7 +121,7 @@ public class Order extends AbstractModel
 	public static double calculatePriceAfterBenefits(double benefitDiscountPercentage, double itemPrice)
 	{
 		double newPrice = itemPrice * (itemPrice * benefitDiscountPercentage);
-		System.out.println("New Applied Membership Price: $" + newPrice);
+		System.out.println("Member Price: $" + newPrice);
 		return newPrice;
 	}
 	

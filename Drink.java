@@ -2,7 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 
-public class Drink
+public class Drink 
 {
 
 	// name of drink
@@ -24,7 +24,7 @@ public class Drink
 	}
 
 	//Overloaded Constructor with parameter arguments
-	public Drink(String drinkName, String drinkDescription, BigDecimal drinkPrice)
+	public Drink(String drinkName, String drinkDescription, BigDecimal drinkPrice) 
 	{
 		name = drinkName;
 		System.out.println("Generating the following drink: " + drinkName);
@@ -59,14 +59,14 @@ public class Drink
 		return description;
 	}
 	//Mutator Method for setting a drink's price.
-	public void setPrice(BigDecimal priceToSet)
+	public void setPrice(BigDecimal priceToSet) 
 	{
 		System.out.println("Setting the drink price too : " + priceToSet);
 		price = priceToSet;
 		System.out.println("Confirmation for setting the drink price too : " + priceToSet);
 	}
 	//Accessor Method to get a drink's price.
-	public BigDecimal getPrice()
+	public BigDecimal getPrice() 
 	{
 		System.out.println("Retrieving the price of the drink :" + price);
 		return price;
