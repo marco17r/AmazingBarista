@@ -6,9 +6,9 @@ public class GuestLogin
     public void displayMenu() 
     {
         MenuWindow menuPage = new MenuWindow();
-        menuPage.menuDisplayPage("Guest");
+        menuPage.menuDisplayWindow("Guest");
 
-        CheckOutWindow checkoutPage = new CheckOutWindow();
+        CheckoutWindow checkoutPage = new CheckoutWindow();
         checkoutPage.payment();
     }
 }

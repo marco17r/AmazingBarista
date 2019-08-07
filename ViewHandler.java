@@ -11,7 +11,6 @@ import javafx.scene.*;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.control.*;
-import javafx.scene.control.Label;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.paint.*;
 import javafx.scene.paint.Color;
@@ -20,97 +19,87 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 
-public class ViewHandler
+ public class ViewHandler
 {
 	public static String userName;
 	public static String userPass;
 	public static ObservableList<Object> Menu;
-	
-	
-	//Class for displaying the sign-up window
+
+
+ 	//Class for displaying the sign-up window
 	public static void displaySignUp()
 	{
 		Stage signUpWindow = new Stage();
-		//Window set up and set to blocking events to other windows
+		//Block events to other windows
 		signUpWindow.initModality(Modality.APPLICATION_MODAL);
 		signUpWindow.setTitle("Member Sign-Up");
 		signUpWindow.setMinWidth(250);
-		
 		Label newNameLabel = new Label("Name :");
 		TextField newNameTextField = new TextField();
 		Label newPassLabel = new Label("Password :");
-		PasswordField newUserPassWordTextField = new PasswordField();
-		
+		TextField newPassWordTextField = new TextField();
 		//Member Sign-Up button
 		Button signUpButton = new Button("Sign-Up");
-		signUpButton.setOnAction(event ->
+		signUpButton.setOnAction( e ->
 		{
 			ViewHandler.userName = (String) newNameTextField.getText();
-			ViewHandler.userPass = (String) newUserPassWordTextField.getText();
+			ViewHandler.userPass = (String) newPassWordTextField.getText();
 			signUpWindow.close();
 		});
-		
 		//Cancel Sign-Up Button
 		Button cancelButton = new Button("Cancel");
 		cancelButton.setOnAction(e -> signUpWindow.close());
-		
-		VBox verticleBoxLayout = new VBox(10);
-		verticleBoxLayout.setPadding(new Insets(20, 20, 20, 20));
-		verticleBoxLayout.getChildren().addAll(newNameLabel, newNameTextField, newPassLabel, newUserPassWordTextField, signUpButton, cancelButton);
-		verticleBoxLayout.setAlignment(Pos.CENTER_LEFT);
-		
-		Scene signUpScene = new Scene(verticleBoxLayout);
+
+ 		VBox verticleBoxlayout = new VBox(10);
+		verticleBoxlayout.setPadding(new Insets(20, 20, 20, 20));
+		verticleBoxlayout.getChildren().addAll(newNameLabel, newNameTextField, newPassLabel, newPassWordTextField, signUpButton, cancelButton);
+		verticleBoxlayout.setAlignment(Pos.CENTER_LEFT);
+
+ 		Scene signUpScene = new Scene(verticleBoxlayout);
 		signUpWindow.setScene(signUpScene);
-		//Display login window and wait for it to be cancelled before returning.
 		signUpWindow.showAndWait();
 	}
-	
-	
-	//Class for displaying the log-in window
+
+
+ 	//Class for displaying the log-in window
 	public static void displayLogIn()
 	{
 		Stage logInWindow = new Stage();
-		//Window set up and set to blocking events to other windows
+		//Block events to other windows
 		logInWindow.initModality(Modality.APPLICATION_MODAL);
 		logInWindow.setTitle("Member Login");
 		logInWindow.setMinWidth(250);
-		
 		Label NameLabel = new Label("Name :");
 		//Text Field for user name input
 		TextField userNameTextField = new TextField();
 		Label PassLabel = new Label("Password :");
 		//Text field for user name password
-		PasswordField userPassWordTextField = new PasswordField();
-		
+		TextField userPassWordTextField = new TextField();
 		//Member Login Button
 		Button logInButton = new Button("Login");
-		logInButton.setOnAction(event ->
+		logInButton.setOnAction( e ->
 		{
 			ViewHandler.userName = (String) userNameTextField.getText();
 			ViewHandler.userPass = (String) userPassWordTextField.getText();
 			logInWindow.close();
 		});
-		
-		//Cancel Button
+		//Exit Button
 		Button cancelButton = new Button("Cancel");
-		cancelButton.setOnAction(event -> logInWindow.close());
-		
+		cancelButton.setOnAction(e -> logInWindow.close());
 		//Display Set-up?
-		VBox verticleDisplayBoxLayout = new VBox(10);
-		verticleDisplayBoxLayout.setPadding(new Insets(20, 20, 20, 20));
-		verticleDisplayBoxLayout.getChildren().addAll(NameLabel, userNameTextField, PassLabel,userPassWordTextField, logInButton, cancelButton);
-		verticleDisplayBoxLayout.setAlignment(Pos.TOP_LEFT);
-		
-		
-		Scene logInScene = new Scene(verticleDisplayBoxLayout);
+		VBox verticleBoxLayout = new VBox(10);
+		verticleBoxLayout.setPadding(new Insets(20, 20, 20, 20));
+		verticleBoxLayout.getChildren().addAll(NameLabel, userNameTextField, PassLabel,userPassWordTextField, logInButton, cancelButton);
+		verticleBoxLayout.setAlignment(Pos.TOP_LEFT);
+		//Display login window and wait for it to be cancelled before returning.
+		Scene logInScene = new Scene(verticleBoxLayout);
 		logInScene.setFill(Color.GREENYELLOW);
 		logInWindow.setScene(logInScene);
-		//Display login window and wait for it to be cancelled before returning.
 		logInWindow.showAndWait();
 	}
-	
-	
-	//Class for displaying the Menu for Drinks window
+
+
+ 	//Class for displaying the Menu for Drinks window
 	public static void displayDrinkMenu()
 	{
 		Stage displayDrinkMenuWindow = new Stage();
@@ -120,56 +109,79 @@ public class ViewHandler
 		displayDrinkMenuWindow.setTitle("Drink Menu");
 		//sets the minimum width of the drink menu window
 		displayDrinkMenuWindow.setMinWidth(250);
-		//Good place to place the controller
 		//GameController gc = new GameController();
 		//gc.getLeaderBoard();
-		
-		TableColumn <Object, String> drinkNameColumn = new TableColumn<> ("Drink");
+
+ 		TableColumn <Object, String> drinkNameColumn = new TableColumn<> ("Drink");
 		drinkNameColumn.setMinWidth(200);
-		drinkNameColumn.setCellValueFactory(new PropertyValueFactory <> ("drink Name"));
-		//drinkNameColumn.
-		TableColumn <Object, String> drinkDescriptionColumn = new TableColumn<> ("Description");
+		drinkNameColumn.setCellValueFactory(new PropertyValueFactory <> ("Drink Name"));
+
+ 		TableColumn <Object, String> drinkDescriptionColumn = new TableColumn<> ("Description");
 		drinkDescriptionColumn.setMinWidth(200);
-		drinkDescriptionColumn.setCellValueFactory(new PropertyValueFactory <> ("playerName"));
-		
-		TableColumn <Object, Integer> drinkPriceColumn = new TableColumn<> ("Price");
+		drinkDescriptionColumn.setCellValueFactory(new PropertyValueFactory <> ("Drink Description"));
+
+ 		TableColumn <Object, Integer> drinkPriceColumn = new TableColumn<> ("Price");
 		drinkPriceColumn.setMinWidth(200);
-		drinkPriceColumn.setCellValueFactory(new PropertyValueFactory <> ("drink price"));
-	    
-		//TableCell <String> drinkNameRow0 = new TableCell<> ("Water");
-		//drinkNameRow0.setMinWidth(200);
-		//drinkNameRow0.setCellValueFactory(new PropertyValueFactory <> ("water"));
+		drinkPriceColumn.setCellValueFactory(new PropertyValueFactory <> ("Drink price"));
+
+ 		//TableRow drinkNameRow0 = new TableRow (null);
+		//drinkNameRow0.equals(obj)
+		//setCellValueFactory(new PropertyValueFactory <> ("water"));
 		
-		TableView <Object> drinkMenuTable = new TableView<>();
-		//table.setItems(leaderboard);
+		Inventory inv = new Inventory();
+		TableView <Object> drinkMenuTable = new TableView <Object>();
+		HBox horizontalBoxLayout = new HBox(10);
+        Map<String, Drink> mapOfDrinks = inv.storeDefaultDrinkMenu();
+
+        for (String itemName : mapOfDrinks.keySet()) 
+        {
+            Drink drink = mapOfDrinks.get(itemName);
+            //horizontalBoxLayout.getChildrenUnmodifiable().addAll(createDrinkMenuItems(drink.getName(), drink.getDescription(), String.valueOf(drink.getPrice())));
+            //table.setParent(Pos.CENTER_LEFT);
+            horizontalBoxLayout.getChildren().addAll(createDrinkMenuItems(drink.getName(), drink.getDescription(), String.valueOf(drink.getPrice())));
+        }
+ 		
 		drinkMenuTable.getColumns().add(drinkNameColumn);
 		drinkMenuTable.getColumns().add(drinkDescriptionColumn);
 		drinkMenuTable.getColumns().add(drinkPriceColumn);
+		//drinkMenuTable.getRowFactory().add(horizontalBoxLayout);
 		VBox verticleBox = new VBox();
 		verticleBox.getChildren().add(drinkMenuTable);
-		
-		Scene displayDrinkMenuScene = new Scene(verticleBox);
-		displayDrinkMenuScene.setFill(Color.RED);
-		displayDrinkMenuWindow.setScene(displayDrinkMenuScene);
+
+ 		Scene drinkMenuScene = new Scene(verticleBox);
+		drinkMenuScene.setFill(Color.RED);
+		displayDrinkMenuWindow.setScene(drinkMenuScene);
 		displayDrinkMenuWindow.show();
 	}
-	
-	
-	//Class for displaying the current customer's order
-	public static void displayFinishedOrder()
+
+
+ 	//Class for displaying the current customer's order
+	public static void displayOrder()
 	{
-		Stage displayOrderWindow = new Stage();
-		//Block events to other windows
-		displayOrderWindow.initModality(Modality.APPLICATION_MODAL);
-		//sets the window title
-		displayOrderWindow.setTitle("Order Complete");
+		Stage window = new Stage();
+		window.initModality(Modality.APPLICATION_MODAL);
+		//sets the window title to the parameter argument above
+		window.setTitle("Current Order");
 		//sets the minimum width of the drink menu window
-		displayOrderWindow.setMinWidth(250);
-		Text closingMessage = new Text("Enjoy your drink(s)! Come back again!");
-		VBox verticalBoxLayout = new VBox();
-		verticalBoxLayout.getChildren().add(closingMessage);
-		Scene scene = new Scene(verticalBoxLayout);
-		displayOrderWindow.setScene(scene);
-		displayOrderWindow.show();
+		window.setMinWidth(250);
+		//GameController gc = new GameController();
+		//gc.getLeaderBoard();
 	}
-}
+	
+	private static HBox createDrinkMenuItems(String drinkTitleItem, String drinkDescriptionItem, String drinkPriceItem) 
+    {
+        HBox horizontalBox = new HBox();
+        horizontalBox.getChildren().add(new Label(drinkTitleItem));
+        //horizontalBox.setSpacing(50.0);
+        //horizontalBox.setAlignment(Pos.CENTER_LEFT);
+        
+        horizontalBox.getChildren().add(new Label(drinkDescriptionItem));
+        //horizontalBox.setSpacing(50.0);
+        //horizontalBox.setAlignment(Pos.CENTER_LEFT);
+        
+        horizontalBox.getChildren().add(new Label(drinkPriceItem));
+        horizontalBox.setSpacing(50.0);
+        horizontalBox.setAlignment(Pos.CENTER);
+        return horizontalBox;
+    }
+} 
